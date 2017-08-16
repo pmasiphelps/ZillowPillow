@@ -154,18 +154,18 @@ properties1 <- properties1 %>%
 
 ### Step 2: impute the new column value for tax_building where tax_building missing and 
 ### nbath or nbed > 0
-properties3$tax_building[is.na(properties3$tax_building) & 
-                           (properties3$num_bedroom > 0 | 
-                              properties3$num_bathroom > 0) & 
-                           !(is.na(properties3$num_bathroom))] <- properties3$mean_zip_bb_tax_build[is.na(properties3$tax_building) & 
-                                                                                                      (properties3$num_bedroom > 0 |
-                                                                                                         properties3$num_bathroom > 0) & 
-                                                                                                      !(is.na(properties3$num_bathroom))]
+properties1$tax_building[is.na(properties1$tax_building) & 
+                           (properties1$num_bedroom > 0 | 
+                              properties1$num_bathroom > 0) & 
+                           !(is.na(properties1$num_bathroom))] <- properties1$mean_zip_bb_tax_build[is.na(properties1$tax_building) & 
+                                                                                                      (properties1$num_bedroom > 0 |
+                                                                                                         properties1$num_bathroom > 0) & 
+                                                                                                      !(is.na(properties1$num_bathroom))]
 
 ### Step 3: impute zero for tax_land for the above observations where we imputed the mean tax_building value
-properties1$tax_land[is.na(properties3$tax_land) & 
-                       properties3$tax_building > 0 &
-                       !(is.na(properties3$num_bathroom))] <- 0
+properties1$tax_land[is.na(properties1$tax_land) & 
+                       properties1$tax_building > 0 &
+                       !(is.na(properties1$num_bathroom))] <- 0
 
 ### tax_total: equal to sum of tax_land and tax_property. useless.
 
