@@ -141,6 +141,32 @@ properties1$tax_land[is.na(properties1$tax_building) &
 properties1$tax_building[is.na(properties1$tax_building) & 
                            !(is.na(properties1$tax_property))] <- 0
 
+### where no tax_building, tax_land, tax_property, or tax_total, but more than zero 
+### bathrooms or bedrooms, we impute the mean tax_building and tax_land for that 
+### particular zipcode, number of bedrooms, and number of bathrooms in the missing 
+### tax_building and tax_land columns
+### Step 1: create new column with mean tax_building by by zip, nbed, nbath
+
+properties1 <- properties1 %>% 
+  group_by(region_zip, num_bedroom, num_bathroom) %>% 
+  mutate(mean_zip_bb_tax_build = mean(tax_building, na.rm = TRUE)) %>% 
+  ungroup
+
+### Step 2: impute the new column value for tax_building where tax_building missing and 
+### nbath or nbed > 0
+properties3$tax_building[is.na(properties3$tax_building) & 
+                           (properties3$num_bedroom > 0 | 
+                              properties3$num_bathroom > 0) & 
+                           !(is.na(properties3$num_bathroom))] <- properties3$mean_zip_bb_tax_build[is.na(properties3$tax_building) & 
+                                                                                                      (properties3$num_bedroom > 0 |
+                                                                                                         properties3$num_bathroom > 0) & 
+                                                                                                      !(is.na(properties3$num_bathroom))]
+
+### Step 3: impute zero for tax_land for the above observations where we imputed the mean tax_building value
+properties1$tax_land[is.na(properties3$tax_land) & 
+                       properties3$tax_building > 0 &
+                       !(is.na(properties3$num_bathroom))] <- 0
+
 ### tax_total: equal to sum of tax_land and tax_property. useless.
 
 ###   Katie
