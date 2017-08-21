@@ -142,8 +142,8 @@ levels(factor_properties$heatingorsystemtypeid)
 levels(factor_allData$heatingorsystemtypeid)
 [1] "1"  "2"  "6"  "7"  "10" "11" "12" "13" "14" "18" "20" "24"
 
-  #recommend changing 19 (steam) and 21 (space/suspended) each to 24 (yes)
-  factor_properties$heatingorsystemtypeid[factor_properties$heatingorsystemtypeid %in% c("19","21")] <- "24"
+  #recommend changing 8 (gas) and 11 (heat pump) each to 2 (central)
+  factor_properties$heatingorsystemtypeid[factor_properties$heatingorsystemtypeid %in% c("8","11")] <- "2"
 
   #Update: both datasets have same levels
 
