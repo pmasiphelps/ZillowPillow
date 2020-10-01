@@ -1,6 +1,6 @@
 # Zillow Machine Learning Kaggle Project
 ## Contributors: Katie Critelli, Patrick Masi-Phelps, John Merrick, and Ningxi Xu
-## Blog post: https://blog.nycdatascience.com/student-works/machine-learning/zillow-prize-competing-improve-zestimate/
+#### Blog post: https://blog.nycdatascience.com/student-works/machine-learning/zillow-prize-competing-improve-zestimate/
 
 Welcome to the repository for Team Zillow Pillow of NYC Data Science Academy! We participated in the Zillow Kaggle competition in August 2017, with the goal of improving Zillow's Zestimate home pricing algorithm by using machine learning techniques to predict error between Zestimates and actual sale prices in the greater Los Angeles area.
 
